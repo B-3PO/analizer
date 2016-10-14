@@ -98,7 +98,8 @@ function analizerProvider() {
       emit: provider.emit,
       trackPageViews: provider.trackPageViews,
       setCustomData: provider.setCustomData,
-      setUser: provider.setUser
+      setUser: provider.setUser,
+      sendTiming: provider.sendTiming
     };
     return service;
 
