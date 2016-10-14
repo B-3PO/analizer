@@ -65,6 +65,15 @@ function configGa($analizerProvider) {
       userId: user.toString()
     }));
   });
+
+  $analizerProvider.on('timing', function (data) {
+    dispatcher({
+      hitType: 'timing',
+      timingCategory: data.category,
+      timingVar: data.label,
+      timingValue: data.milliseconds
+    });
+  });
 }
 
 
@@ -94,7 +103,8 @@ var EVENTS = [
   'onComplete',
   'onCompleteError',
   'setCustomData',
-  'setUser'
+  'setUser',
+  'timing'
 ];
 
 
@@ -111,6 +121,7 @@ function analizerProvider() {
     emit: emit,
     setUser: setUser,
     setCustomData: setCustomData,
+    sendTiming: sendTiming,
     $get: getService
   };
   return provider;
@@ -154,6 +165,15 @@ function analizerProvider() {
 
   function setUser(user) {
     emit('setUser', user);
+  }
+
+
+  function sendTiming(category, label, milliseconds) {
+    emit('timing', {
+      category: category,
+      label: label,
+      milliseconds: milliseconds
+    });
   }
 
 

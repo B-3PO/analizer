@@ -80,7 +80,7 @@ function analizerProvider() {
       category: category,
       label: label,
       milliseconds: milliseconds
-    })
+    });
   }
 
 
