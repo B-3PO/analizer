@@ -1,63 +1,20 @@
 var paths = require('./gulp/config').paths;
 
 var gulp = require('gulp');
-var serve = require('gulp-serve');
 var gulpSequence = require('gulp-sequence');
 var del = require('del');
 var bump = require('gulp-bump');
-var sass = require('gulp-sass');
 var rename = require('gulp-rename');
 var wrap = require('gulp-wrap');
-var templateCache = require('gulp-angular-templatecache');
 var KarmaServer = require('karma').Server;
-
-
 var jsBuild = require('./gulp/jsBuild');
-var cssBuild = require('./gulp/cssBuild');
-var indexBuild = require('./gulp/indexBuild');
 
-
-
-gulp.task('jsSrcBuild', jsBuild.getDevSrc());
-gulp.task('jsAppBuild', jsBuild.getDevApp());
 gulp.task('jsReleaseBuild', jsBuild.release);
-gulp.task('cssBuild', cssBuild.getDev());
-gulp.task('cssReleaseBuild', cssBuild.release);
-gulp.task('indexBuild', indexBuild.inject);
 
 
 
 // -- main tasks. use these to watch and build and release
-
-gulp.task('default', gulpSequence('buildLocal', ['serve', 'watch']));
-gulp.task('buildLocal', gulpSequence(
-  'clean',
-  [
-    'jsSrcBuild',
-    'jsAppBuild',
-    'cssBuild',
-    'copyPartials'
-  ],
-  'indexBuild'
-));
-
-gulp.task('build', gulpSequence('jsReleaseBuild', 'cssReleaseBuild'));
-
-
-gulp.task('clean', function () {
-  return del(paths.dest);
-});
-
-gulp.task('copyPartials', function () {
-  return gulp.src(paths.partials, {base: paths.app})
-    .pipe(gulp.dest(paths.dest));
-});
-
-gulp.task('serve', serve({
-  root: ['public', 'bower_components'],
-  port: 8080
-}));
-
+gulp.task('build', ['jsReleaseBuild']);
 
 
 gulp.task('test-karma', function (done) {
@@ -75,41 +32,6 @@ gulp.task('test-karma', function (done) {
 });
 
 gulp.task('test', gulpSequence('build', 'test-karma'));
-
-
-
-
-gulp.task('watch', function () {
-  gulp.watch(paths.scripts, function (event) {
-    jsBuild.getDevSrc(event.path)()
-      .on('end', function () {
-        if (event.type !== 'changed') { indexBuild.inject(); }
-      });
-  });
-
-  gulp.watch(paths.appScripts, function (event) {
-    jsBuild.getDevApp(event.path)()
-      .on('end', function () {
-        if (event.type !== 'changed') { indexBuild.inject(); }
-      });
-  });
-
-
-  gulp.watch(paths.css.concat(paths.appCss), function (event) {
-    cssBuild.getDev(event.path)()
-      .on('end', function () {
-        if (event.type !== 'changed') { indexBuild.inject(); }
-      });
-  });
-
-  gulp.watch(paths.partials, function (event) {
-    return gulp.src(event.path, {base: paths.app})
-      .pipe(gulp.dest(paths.dest));
-  });
-});
-
-
-
 
 
 

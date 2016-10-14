@@ -28,33 +28,17 @@ exports.getDevSrc = function (srcs) {
 }
 
 
-exports.getDevApp = function (srcs) {
-  srcs = srcs || paths.appScripts;
-
-  return function dev() {
-    return gulp.src(srcs, {base: paths.app})
-      .pipe(wrap('(function(){"use strict";<%= contents %>}());'))
-      .pipe(jshint())
-      .pipe(jshint.reporter('default'))
-      .pipe(gulp.dest(paths.dest))
-      .on('end', function() {
-        gutil.log(gutil.colors.green('✔ JS Dev'), 'Finished');
-      });
-  };
-}
-
-
 exports.release = function () {
   return gulp.src(paths.scripts)
     .pipe(wrap('(function(){"use strict";<%= contents %>}());'))
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
-    .pipe(concat('angular-virtual-pete.js'))
+    .pipe(concat('angular-analizer.js'))
     .pipe(stripDebug())
     .pipe(ngAnnotate())
     .pipe(gulp.dest(paths.build))
     .pipe(uglify())
-    .pipe(rename('angular-virtual-pete.min.js'))
+    .pipe(rename('angular-analizer.min.js'))
     .pipe(gulp.dest(paths.build))
     .on('end', function() {
       gutil.log(gutil.colors.green('✔ JS build'), 'Finished');
