@@ -1,21 +1,20 @@
 {
-  "name": "angular-virtual-pete",
-  "version": "0.0.1-0",
-  "description": "Angular component for virtual repeat",
+  "name": "angular-analizer",
+  "version": "0.0.0",
+  "description": "A slightly differnet take on angular analytics",
   "main": [
-    "dist/angular-virtual-pete.js",
-    "dist/angular-virtual-pete.css"
+    "dist/angular-analizer.js"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/B-3PO/angular-virtual-pete.git"
+    "url": "git://github.com/B-3PO/angular-analizer.git"
   },
   "authors": [
     "Ben Rubin"
   ],
   "license": "MIT",
   "keywords": [
-    "angular, component, virtual, repeat, infinite, virtual-repeat, virtual-pete, angular-virtual-pete"
+    "angular, google, analytics, analizer, angular-analizer"
   ],
   "ignore": [
     "**/.*",
@@ -26,14 +25,9 @@
     "gulp"
   ],
   "dependencies": {
-    "angular": "^1.5.7",
-    "angular-animate": "^1.5.7",
-    "angular-messages": "^1.5.7",
-    "angular-aria": "^1.5.7",
-    "angular-material": "^1.1.0"
+    "angular": "^1.5.8"
   },
   "devDependencies": {
-    "angular-mocks": "^1.5.7",
-    "angular-route": "^1.5.7"
+    "angular-mocks": "^1.5.8"
   }
 }
