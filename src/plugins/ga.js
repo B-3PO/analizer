@@ -62,6 +62,15 @@ function configGa($analizerProvider) {
       userId: user.toString()
     }));
   });
+
+  $analizerProvider.on('timing', function (data) {
+    dispatcher({
+      hitType: 'timing',
+      timingCategory: data.category,
+      timingVar: data.label,
+      timingValue: data.milliseconds
+    });
+  });
 }
 
 
