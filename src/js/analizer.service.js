@@ -1,6 +1,6 @@
 angular
-  .module('analizer')
-  .provider('$analizer', analizerProvider)
+  .module('analyzer')
+  .provider('$analyzer', analyzerProvider)
   .run(anailzerRun);
 
 
@@ -15,7 +15,7 @@ var EVENTS = [
 ];
 
 
-function analizerProvider() {
+function analyzerProvider() {
   var listeners = {};
   EVENTS.forEach(function (key) {
     listeners[key] = [];
@@ -36,7 +36,7 @@ function analizerProvider() {
 
   function on(eventName, callback) {
     if (EVENTS.indexOf(eventName) === -1) {
-      console.error('analizer does not except "'+eventName+'" as an event.  Please use one of these ('+EVENTS.join(',')+')');
+      console.error('analyzer does not except "'+eventName+'" as an event.  Please use one of these ('+EVENTS.join(',')+')');
       return;
     }
     if (listeners[eventName].indexOf(callback) > -1) {
@@ -117,12 +117,12 @@ function analizerProvider() {
 
 
 /*@ngInject*/
-function anailzerRun($analizer, $rootScope) {
-  if ($analizer.trackPageViews === false) { return; }
+function anailzerRun($analyzer, $rootScope) {
+  if ($analyzer.trackPageViews === false) { return; }
 
   $rootScope.$on('$locationChangeSuccess', function (event, current) {
     var relativeUrl = current.replace(window.location.origin, '');
-    $analizer.emit('url', {
+    $analyzer.emit('url', {
       origin: window.location.origin,
       relative: relativeUrl,
       absolute: current

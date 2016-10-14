@@ -1,10 +1,10 @@
 angular
-  .module('analizer')
-  .directive('analizer', analizerDirective);
+  .module('analyzer')
+  .directive('analyzer', analyzerDirective);
 
 
 /*@ngInject*/
-function analizerDirective($analizerUtil, $analizer, $parse, $q, $rootScope) {
+function analyzerDirective($analyzerUtil, $analyzer, $parse, $q, $rootScope) {
   var directive = {
     restrict: 'A',
     compile: compile
@@ -15,9 +15,9 @@ function analizerDirective($analizerUtil, $analizer, $parse, $q, $rootScope) {
 
   function compile(tElement, tAttrs) {
     var onCompleteParse;
-    var isOnComplete = tAttrs.analizerOnComplete !== undefined;
-    var isOnResolve = tAttrs.analizerOnResolve !== undefined;
-    var isOnReject = tAttrs.analizerOnReject !== undefined;
+    var isOnComplete = tAttrs.analyzerOnComplete !== undefined;
+    var isOnResolve = tAttrs.analyzerOnResolve !== undefined;
+    var isOnReject = tAttrs.analyzerOnReject !== undefined;
 
     // get ngClick function parser
     if ((isOnComplete || isOnResolve || isOnReject) && tAttrs.ngClick !== undefined) {
@@ -27,10 +27,10 @@ function analizerDirective($analizerUtil, $analizer, $parse, $q, $rootScope) {
 
 
     return function postLink(scope, element, attrs) {
-      var label = tAttrs.analizerLabel || $analizerUtil.getLabel(element);
-      var action = tAttrs.analizerAction || 'click';
-      var type = tAttrs.analizerCategory || $analizerUtil.getElementType(element);
-      if ($analizerUtil.isClickType(type)) { trackClick(); }
+      var label = tAttrs.analyzerLabel || $analyzerUtil.getLabel(element);
+      var action = tAttrs.analyzerAction || 'click';
+      var type = tAttrs.analyzerCategory || $analyzerUtil.getElementType(element);
+      if ($analyzerUtil.isClickType(type)) { trackClick(); }
 
       function trackClick() {
         element.on('click', function (ev) {
@@ -45,7 +45,7 @@ function analizerDirective($analizerUtil, $analizer, $parse, $q, $rootScope) {
             scope.$apply(callback);
           }
 
-          $analizer.emit('click', {
+          $analyzer.emit('click', {
             clickEvent: ev,
             type: type,
             label: label,
@@ -56,12 +56,12 @@ function analizerDirective($analizerUtil, $analizer, $parse, $q, $rootScope) {
       }
 
 
-      // if `analizerOnComplete` attr exists and ngClick exists then look for promise to complete from click method call
+      // if `analyzerOnComplete` attr exists and ngClick exists then look for promise to complete from click method call
       function waitForComplete(promise, type, label) {
         $q.when(promise)
           .then(function() {
             if (isOnComplete || isOnResolve) {
-              $analizer.emit('onComplete', {
+              $analyzer.emit('onComplete', {
                 type: type,
                 label: label,
                 category: type,
@@ -71,7 +71,7 @@ function analizerDirective($analizerUtil, $analizer, $parse, $q, $rootScope) {
           })
           .catch(function () {
             if (isOnComplete || isOnReject) {
-              $analizer.emit('onCompleteError', {
+              $analyzer.emit('onCompleteError', {
                 type: type,
                 label: label,
                 category: type,

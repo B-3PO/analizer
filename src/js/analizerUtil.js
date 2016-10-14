@@ -1,6 +1,6 @@
 angular
-  .module('analizer')
-  .factory('$analizerUtil', analizerUtil);
+  .module('analyzer')
+  .factory('$analyzerUtil', analyzerUtil);
 
 
 var ELEMENT_TYPE = {
@@ -23,7 +23,7 @@ var CLICK_TYPES = {
 
 
 
-function analizerUtil() {
+function analyzerUtil() {
   var service = {
     getElementType: getElementType,
     isClickType: isClickType,

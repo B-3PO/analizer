@@ -1,1 +1,1 @@
-angular.module('analizer', []);
+angular.module('analyzer', []);

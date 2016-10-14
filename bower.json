@@ -1,20 +1,20 @@
 {
-  "name": "angular-analizer",
-  "version": "0.0.1-2",
+  "name": "angular-analyzer",
+  "version": "0.0.0",
   "description": "A slightly differnet take on angular analytics",
   "main": [
-    "dist/angular-analizer.js"
+    "dist/angular-analyzer.js"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/B-3PO/angular-analizer.git"
+    "url": "git://github.com/B-3PO/angular-analyzer.git"
   },
   "authors": [
     "Ben Rubin"
   ],
   "license": "MIT",
   "keywords": [
-    "angular, google, analytics, analizer, angular-analizer"
+    "angular, google, analytics, analyzer, angular-analyzer"
   ],
   "ignore": [
     "**/.*",

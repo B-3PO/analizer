@@ -1,15 +1,15 @@
 angular
-  .module('analizer.ga', ['analizer'])
+  .module('analyzer.ga', ['analyzer'])
   .config(configGa);
 
 
 /*@ngInject*/
-function configGa($analizerProvider) {
+function configGa($analyzerProvider) {
   var dispatcher = getDispatcher();
   var demensions = [];
 
-  $analizerProvider.on('url', function (data) {
-    if ($analizerProvider.trackPageViews === false) { return; }
+  $analyzerProvider.on('url', function (data) {
+    if ($analyzerProvider.trackPageViews === false) { return; }
     // set page for all calls
     dispatcher({
       command: 'set',
@@ -23,7 +23,7 @@ function configGa($analizerProvider) {
     });
   });
 
-  $analizerProvider.on('click', function (data) {
+  $analyzerProvider.on('click', function (data) {
     dispatcher({
       hitType: 'event',
       eventCategory: data.type,
@@ -32,7 +32,7 @@ function configGa($analizerProvider) {
     });
   });
 
-  $analizerProvider.on('onComplete', function (data) {
+  $analyzerProvider.on('onComplete', function (data) {
     dispatcher({
       hitType: 'event',
       eventCategory: data.type,
@@ -41,7 +41,7 @@ function configGa($analizerProvider) {
     });
   });
 
-  $analizerProvider.on('onCompleteError', function (data) {
+  $analyzerProvider.on('onCompleteError', function (data) {
     dispatcher({
       hitType: 'event',
       eventCategory: data.type,
@@ -50,20 +50,20 @@ function configGa($analizerProvider) {
     });
   });
 
-  $analizerProvider.on('setCustomData', function (data) {
+  $analyzerProvider.on('setCustomData', function (data) {
     var obj = {};
     obj[data.name] = data.value.toString();
     dispatcher(angular.extend({command: 'set'}, obj));
   });
 
 
-  $analizerProvider.on('setUser', function (user) {
+  $analyzerProvider.on('setUser', function (user) {
     dispatcher(angular.extend({command: 'set'}, {
       userId: user.toString()
     }));
   });
 
-  $analizerProvider.on('timing', function (data) {
+  $analyzerProvider.on('timing', function (data) {
     dispatcher({
       hitType: 'timing',
       timingCategory: data.category,

@@ -33,12 +33,12 @@ exports.release = function () {
     .pipe(wrap('(function(){"use strict";<%= contents %>}());'))
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
-    .pipe(concat('angular-analizer.js'))
+    .pipe(concat('angular-analyzer.js'))
     .pipe(stripDebug())
     .pipe(ngAnnotate())
     .pipe(gulp.dest(paths.build))
     .pipe(uglify())
-    .pipe(rename('angular-analizer.min.js'))
+    .pipe(rename('angular-analyzer.min.js'))
     .pipe(gulp.dest(paths.build))
     .on('end', function() {
       gutil.log(gutil.colors.green('✔ JS build'), 'Finished');
