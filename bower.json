@@ -1,6 +1,6 @@
 {
   "name": "angular-analizer",
-  "version": "0.0.1-0",
+  "version": "0.0.1-2",
   "description": "A slightly differnet take on angular analytics",
   "main": [
     "dist/angular-analizer.js"
